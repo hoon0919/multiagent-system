@@ -21,6 +21,8 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long projetId;
 
+    private Long userId;
+
     private String projectName;
 
     private String projectDescription;
@@ -28,7 +30,7 @@ public class Project {
     @ElementCollection
     private List<Attachment> attachments;
 
-    private TeamMembers membersEmail;
+    private String membersEmail;
 
     @PostPersist
     public void onPostPersist() {

@@ -13,4 +13,5 @@ public class ProjectCreated extends AbstractEvent {
     private String projectDescription;
     private Object attachments;
     private String projectName;
+    private Long userId;
 }

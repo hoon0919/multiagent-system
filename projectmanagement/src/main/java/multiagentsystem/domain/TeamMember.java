@@ -18,7 +18,7 @@ public class TeamMember  {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private Long userId;
     
     
     
@@ -29,8 +29,9 @@ public class TeamMember  {
         
     }
     
-    protected TeamMember(String email, ) {
+    protected TeamMember(String email, long userId) {
         this.email = email;
+        this.userId = userId;
         
     }
 

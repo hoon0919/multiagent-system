@@ -32,8 +32,9 @@ public class Post {
 
     private Long userId;
 
-    @Embedded
-    private File fileUrl;
+    @ElementCollection
+    @CollectionTable(name = "post_files", joinColumns = @JoinColumn(name = "post_id"))
+    private List<File> fileUrl;
 
     public static PostRepository repository() {
         PostRepository postRepository = PostmanagementApplication.applicationContext.getBean(

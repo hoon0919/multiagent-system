@@ -9,5 +9,4 @@ public class CreateCommentCommand {
 
     private String content;
     private Long postId;
-    private String content;
 }

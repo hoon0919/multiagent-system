@@ -48,7 +48,10 @@ public class PolicyHandler {
         //command.setCreatedAt("???");
         //command.setUpdatedAt("???");
         //command.setUserId("???");
-        Post.createPost(command);
+
+        Post post = new Post();
+        post.createPost(command);
+        postRepository.save(post);
     }
 
     @StreamListener(
