@@ -1,0 +1,100 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+#<<< API Gateway / Routes
+      routes:
+        - id: invitemanagement
+          uri: http://localhost:8082
+          predicates:
+            - Path=/invites/**, 
+        - id: projectmanagement
+          uri: http://localhost:8083
+          predicates:
+            - Path=/projects/**, 
+        - id: usermanagement
+          uri: http://localhost:8084
+          predicates:
+            - Path=/users/**, 
+        - id: postmanagement
+          uri: http://localhost:8085
+          predicates:
+            - Path=/posts/**, 
+        - id: attachmentmanagement
+          uri: http://localhost:8086
+          predicates:
+            - Path=/attachments/**, 
+        - id: commentmanagement
+          uri: http://localhost:8087
+          predicates:
+            - Path=/comments/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+#>>> API Gateway / Routes
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: invitemanagement
+          uri: http://invitemanagement:8080
+          predicates:
+            - Path=/invites/**, 
+        - id: projectmanagement
+          uri: http://projectmanagement:8080
+          predicates:
+            - Path=/projects/**, 
+        - id: usermanagement
+          uri: http://usermanagement:8080
+          predicates:
+            - Path=/users/**, 
+        - id: postmanagement
+          uri: http://postmanagement:8080
+          predicates:
+            - Path=/posts/**, 
+        - id: attachmentmanagement
+          uri: http://attachmentmanagement:8080
+          predicates:
+            - Path=/attachments/**, 
+        - id: commentmanagement
+          uri: http://commentmanagement:8080
+          predicates:
+            - Path=/comments/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080

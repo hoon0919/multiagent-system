@@ -1,0 +1,98 @@
+name: github-action
+run-name: ${{ github.actor }} is out building GitHub Actions
+
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '**' 
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build Maven Projects
+        run: |
+          mvn clean package -f ./invitemanagement/pom.xml
+          mvn clean package -f ./projectmanagement/pom.xml
+          mvn clean package -f ./usermanagement/pom.xml
+          mvn clean package -f ./postmanagement/pom.xml
+          mvn clean package -f ./attachmentmanagement/pom.xml
+          mvn clean package -f ./commentmanagement/pom.xml
+
+      - name: Docker Build and push for Invitemanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./invitemanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/invitemanagement:latest
+            ghcr.io/${{ github.repository }}/invitemanagement:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Projectmanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./projectmanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/projectmanagement:latest
+            ghcr.io/${{ github.repository }}/projectmanagement:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Usermanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./usermanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/usermanagement:latest
+            ghcr.io/${{ github.repository }}/usermanagement:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Postmanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./postmanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/postmanagement:latest
+            ghcr.io/${{ github.repository }}/postmanagement:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Attachmentmanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./attachmentmanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/attachmentmanagement:latest
+            ghcr.io/${{ github.repository }}/attachmentmanagement:${{ github.ref_name }}
+            
+      - name: Docker Build and push for Commentmanagement
+        uses: docker/build-push-action@v4
+        with:
+          context: ./commentmanagement
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/commentmanagement:latest
+            ghcr.io/${{ github.repository }}/commentmanagement:${{ github.ref_name }}
+            

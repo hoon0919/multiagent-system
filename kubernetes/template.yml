@@ -1,0 +1,342 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: invitemanagement
+  labels:
+    app: invitemanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: invitemanagement
+  template:
+    metadata:
+      labels:
+        app: invitemanagement
+    spec:
+      containers:
+        - name: invitemanagement
+          image: username/invitemanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectmanagement
+  labels:
+    app: projectmanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projectmanagement
+  template:
+    metadata:
+      labels:
+        app: projectmanagement
+    spec:
+      containers:
+        - name: projectmanagement
+          image: username/projectmanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usermanagement
+  labels:
+    app: usermanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usermanagement
+  template:
+    metadata:
+      labels:
+        app: usermanagement
+    spec:
+      containers:
+        - name: usermanagement
+          image: username/usermanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postmanagement
+  labels:
+    app: postmanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postmanagement
+  template:
+    metadata:
+      labels:
+        app: postmanagement
+    spec:
+      containers:
+        - name: postmanagement
+          image: username/postmanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attachmentmanagement
+  labels:
+    app: attachmentmanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attachmentmanagement
+  template:
+    metadata:
+      labels:
+        app: attachmentmanagement
+    spec:
+      containers:
+        - name: attachmentmanagement
+          image: username/attachmentmanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commentmanagement
+  labels:
+    app: commentmanagement
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: commentmanagement
+  template:
+    metadata:
+      labels:
+        app: commentmanagement
+    spec:
+      containers:
+        - name: commentmanagement
+          image: username/commentmanagement:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: invitemanagement
+  labels:
+    app: invitemanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: invitemanagement
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectmanagement
+  labels:
+    app: projectmanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: projectmanagement
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: usermanagement
+  labels:
+    app: usermanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: usermanagement
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postmanagement
+  labels:
+    app: postmanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: postmanagement
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: attachmentmanagement
+  labels:
+    app: attachmentmanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: attachmentmanagement
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: commentmanagement
+  labels:
+    app: commentmanagement
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: commentmanagement
+
