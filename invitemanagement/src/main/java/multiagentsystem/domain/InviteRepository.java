@@ -7,4 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //<<< PoEAA / Repository
 @RepositoryRestResource(collectionResourceRel = "invites", path = "invites")
 public interface InviteRepository
-    extends PagingAndSortingRepository<Invite, Long> {}
+    extends PagingAndSortingRepository<Invite, Long> {
+        List<Invite> findByEmail(String email);
+    }

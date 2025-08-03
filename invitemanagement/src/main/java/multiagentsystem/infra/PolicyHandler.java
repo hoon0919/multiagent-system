@@ -1,60 +1,49 @@
 package multiagentsystem.infra;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.naming.NameParser;
-import javax.naming.NameParser;
 import javax.transaction.Transactional;
+
 import multiagentsystem.config.kafka.KafkaProcessor;
-import multiagentsystem.domain.*;
+import multiagentsystem.domain.Membersinvited;
+import multiagentsystem.domain.Signuped;
+import multiagentsystem.service.InviteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-//<<< Clean Arch / Inbound Adaptor
 @Service
 @Transactional
 public class PolicyHandler {
 
     @Autowired
-    InviteRepository inviteRepository;
+    private InviteService inviteService;
 
+    // 필요 없는 이벤트 수신기 (유지하되 내용 없음)
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
 
+    // Membersinvited 이벤트 수신 → 초대 생성
     @StreamListener(
         value = KafkaProcessor.INPUT,
         condition = "headers['type']=='Membersinvited'"
     )
     public void wheneverMembersinvited_CreateInviteByProject(
-        @Payload Membersinvited membersinvited
+        @Payload Membersinvited event
     ) {
-        Membersinvited event = membersinvited;
-        System.out.println(
-            "\n\n##### listener CreateInviteByProject : " +
-            membersinvited +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        Invite.createInviteByProject(event);
+        System.out.println("[Invite] Membersinvited 수신: " + event);
+        inviteService.createInviteByProject(event);
     }
 
+    // Signuped 이벤트 수신 → 초대 승인 처리
     @StreamListener(
         value = KafkaProcessor.INPUT,
         condition = "headers['type']=='Signuped'"
     )
     public void wheneverSignuped_CheckInviteBySignup(
-        @Payload Signuped signuped
+        @Payload Signuped event
     ) {
-        Signuped event = signuped;
-        System.out.println(
-            "\n\n##### listener CheckInviteBySignup : " + signuped + "\n\n"
-        );
-
-        // Sample Logic //
-        Invite.checkInviteBySignup(event);
+        System.out.println("[Invite] Signuped 수신: " + event);
+        inviteService.checkInviteBySignup(event);
     }
 }
-//>>> Clean Arch / Inbound Adaptor
