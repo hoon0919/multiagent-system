@@ -36,59 +36,5 @@ public class Invite {
         return inviteRepository;
     }
 
-    //<<< Clean Arch / Port Method
-    public static void createInviteByProject(Membersinvited membersinvited) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Invite invite = new Invite();
-        repository().save(invite);
-
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(membersinvited.get???()).ifPresent(invite->{
-            
-            invite // do something
-            repository().save(invite);
-
-
-         });
-        */
-
-    }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public static void checkInviteBySignup(Signuped signuped) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Invite invite = new Invite();
-        repository().save(invite);
-
-        Teamapproved teamapproved = new Teamapproved(invite);
-        teamapproved.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(signuped.get???()).ifPresent(invite->{
-            
-            invite // do something
-            repository().save(invite);
-
-            Teamapproved teamapproved = new Teamapproved(invite);
-            teamapproved.publishAfterCommit();
-
-         });
-        */
-
-    }
-    //>>> Clean Arch / Port Method
-
 }
 //>>> DDD / Aggregate Root

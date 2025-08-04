@@ -10,7 +10,8 @@ import multiagentsystem.infra.AbstractEvent;
 @Data
 @ToString
 public class Teamapproved extends AbstractEvent {
-
+    
+    private String eventType = "Teamapproved";
     private Long userId;
     private Long projectId;
     

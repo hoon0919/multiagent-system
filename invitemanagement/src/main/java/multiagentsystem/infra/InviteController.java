@@ -1,5 +1,6 @@
 package multiagentsystem.infra;
 
+import java.util.List; 
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,8 +8,6 @@ import javax.transaction.Transactional;
 import multiagentsystem.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 //<<< Clean Arch / Inbound Adaptor
 
@@ -30,7 +29,7 @@ public class InviteController {
     //전체 초대 목록 조회 API
     @GetMapping("/invites")
     public List<Invite> getAllInvites() {
-        return inviteRepository.findAll();
+        return (List<Invite>) inviteRepository.findAll(); // 강제 캐스팅
     }
 
     //이메일 기준 초대 조회 API

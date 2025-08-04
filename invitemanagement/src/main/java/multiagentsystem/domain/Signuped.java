@@ -9,6 +9,7 @@ import multiagentsystem.infra.AbstractEvent;
 @ToString
 public class Signuped extends AbstractEvent {
 
+    private String eventType = "Singuped";
     private Long userId;
     private String email;
 }

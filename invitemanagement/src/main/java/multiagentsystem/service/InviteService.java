@@ -5,7 +5,7 @@ import multiagentsystem.domain.Invite;
 import multiagentsystem.domain.Membersinvited;
 import multiagentsystem.domain.Signuped;
 import multiagentsystem.domain.Teamapproved;
-import multiagentsystem.repository.InviteRepository;
+import multiagentsystem.domain.InviteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
