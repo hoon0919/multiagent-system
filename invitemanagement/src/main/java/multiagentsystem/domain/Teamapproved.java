@@ -13,6 +13,7 @@ public class Teamapproved extends AbstractEvent {
 
     private Long userId;
     private Long projectId;
+    
 
     public Teamapproved(Invite aggregate) {
         super(aggregate);

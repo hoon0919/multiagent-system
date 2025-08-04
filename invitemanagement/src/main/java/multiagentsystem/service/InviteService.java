@@ -21,13 +21,15 @@ public class InviteService {
     // 팀 초대 이벤트 수신 → 초대 생성
     public void createInviteByProject(Membersinvited event) {
         if (event.getProjectId() == null || event.getMembersEmail() == null) return;
+        //여러 개의 member의 email별 invite생성 로직
+        for (String email : event.getMembersEmail()) {
+            Invite invite = new Invite();
+            invite.setProjectId(event.getProjectId());
+            invite.setEmail(email);
+            invite.setStatus("pending");
 
-        Invite invite = new Invite();
-        invite.setProjectId(event.getProjectId());
-        invite.setEmail(event.getMembersEmail());
-        invite.setStatus("pending");
-
-        inviteRepository.save(invite);
+            inviteRepository.save(invite);
+        }
     }
 
     // 사용자 가입 이벤트 수신 → 초대 확인 및 승인 이벤트 발행

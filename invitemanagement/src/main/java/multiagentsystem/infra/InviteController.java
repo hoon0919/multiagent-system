@@ -37,5 +37,6 @@ public class InviteController {
     @GetMapping("/invites/search")
     public List<Invite> getInvitesByEmail(@RequestParam("email") String email) {
         return inviteRepository.findByEmail(email);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

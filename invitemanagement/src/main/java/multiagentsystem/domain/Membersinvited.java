@@ -9,6 +9,6 @@ import multiagentsystem.infra.AbstractEvent;
 @ToString
 public class Membersinvited extends AbstractEvent {
 
-    private String membersEmail;
+    private List<String> membersEmail;
     private Long projectId;
 }
